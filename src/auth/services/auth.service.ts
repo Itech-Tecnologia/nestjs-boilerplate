@@ -15,12 +15,14 @@ export class AuthService {
     private readonly usersService: UsersService,
   ) {}
 
-  async validateUser(email: string, password: string): Promise<UserDto> {
+  async validateUser(email: string, password: string): Promise<UserDto | null> {
     const user = await this.usersService.findByEmailWithPassword(email);
 
-    if (user && (await compare(password, user.password))) {
-      return plainToClass(UserDto, user);
-    }
+    if (!user) return null;
+
+    const passwordMatched = await compare(password, user.password);
+
+    if (passwordMatched) return plainToClass(UserDto, user);
 
     return null;
   }
