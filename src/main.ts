@@ -2,6 +2,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 
+import { UI } from 'bull-board';
+
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -18,6 +20,8 @@ async function bootstrap() {
 
   const configService = app.get(ConfigService);
   const port = configService.get('PORT');
+
+  if (configService.get('NODE_ENV') === 'development') app.use('/queue', UI);
 
   await app.listen(port);
 }

@@ -25,6 +25,9 @@ import { resolve } from 'path';
         SMTP_PORT: Joi.number().required(),
         SMTP_USER: Joi.string().required(),
         SMTP_PASSWORD: Joi.string().required(),
+        REDIS_PASSWORD: Joi.string(),
+        REDIS_DB: Joi.number().default(0),
+        QUEUES_PREFIX: Joi.string().default('nestjs'),
       }),
       validationOptions: {
         abortEarly: true,

@@ -1,15 +1,19 @@
+import { InjectQueue } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectConnection } from '@nestjs/typeorm';
 
-import { MailerService } from '@nestjs-modules/mailer';
+import { ISendMailOptions } from '@nestjs-modules/mailer';
 import { hash } from 'bcryptjs';
+import { Queue } from 'bull';
 import {
   EntitySubscriberInterface,
   InsertEvent,
   Connection,
   UpdateEvent,
 } from 'typeorm';
+
+import { QueuesList } from '~/queues';
 
 import { User } from '../entities';
 
@@ -18,7 +22,8 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
   constructor(
     @InjectConnection() connection: Connection,
     private readonly configService: ConfigService,
-    private readonly mailerService: MailerService,
+    @InjectQueue(QueuesList.SEND_MAIL)
+    private readonly sendMailQueue: Queue<ISendMailOptions>,
   ) {
     connection.subscribers.push(this);
   }
@@ -30,7 +35,7 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
   async beforeInsert({ entity: user }: InsertEvent<User>): Promise<void> {
     await this.hashPassword(user);
 
-    await this.mailerService.sendMail({
+    await this.sendMailQueue.add({
       to: `${user.fullname} <${user.email}>`,
       subject: 'Welcome to NestJS',
       template: 'welcome',
