@@ -32,7 +32,7 @@
       {
         "newlinesBetween": "always",
         "groups": [
-          "/^@nestjs/",
+          "/^@nestjs\//",
           "module",
           "/^~/",
           [

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectConnection } from '@nestjs/typeorm';
 
+import { MailerService } from '@nestjs-modules/mailer';
 import { hash } from 'bcryptjs';
 import {
   EntitySubscriberInterface,
@@ -17,6 +18,7 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
   constructor(
     @InjectConnection() connection: Connection,
     private readonly configService: ConfigService,
+    private readonly mailerService: MailerService,
   ) {
     connection.subscribers.push(this);
   }
@@ -28,7 +30,12 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
   async beforeInsert({ entity: user }: InsertEvent<User>): Promise<void> {
     await this.hashPassword(user);
 
-    // TODO send mail
+    await this.mailerService.sendMail({
+      to: `${user.fullname} <${user.email}>`,
+      subject: 'Welcome to NestJS',
+      template: 'welcome',
+      context: { user },
+    });
   }
 
   async beforeUpdate({
