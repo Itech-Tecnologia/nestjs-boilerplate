@@ -17,7 +17,7 @@ import { UsersModule } from './users';
           .valid('development', 'production', 'test', 'staging')
           .default('development'),
         PORT: Joi.number().default(3333),
-        APP_NAME: Joi.string().default('Cotai'),
+        APP_NAME: Joi.string().default('NestBoilerplate'),
         APP_KEY: Joi.string().required(),
         SALT_HASH_PASSWORD: Joi.number().default(10),
         JWT_EXPIRES: Joi.string().required(),

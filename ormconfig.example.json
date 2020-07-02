@@ -4,7 +4,7 @@
   "port": 5432,
   "username": "",
   "password": "",
-  "database": "cotai",
+  "database": "nest-boilerplate",
   "synchronize": false,
   "dropSchema": false,
   "logging": false,
