@@ -18,7 +18,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "jest --config ./test/jest-e2e.js",
     "pretypeorm": "nest build",
     "typeorm": "ts-node node_modules/.bin/typeorm"
   },
@@ -75,6 +75,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "26.0.1",
     "prettier": "^2.0.5",
+    "sqlite3": "^5.0.0",
     "supertest": "^4.0.2",
     "ts-jest": "26.1.0",
     "ts-loader": "^6.2.1",
