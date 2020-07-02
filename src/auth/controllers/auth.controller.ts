@@ -13,7 +13,7 @@ import { AuthGuard } from '@nestjs/passport';
 
 import { plainToClass } from 'class-transformer';
 
-import { UserDto, CreateUserDto, User } from '~/users';
+import { UserDto, CreateUserDto, User, UsersService } from '~/users';
 
 import { User as CurrentUser } from '../decorators';
 import { LoginResponseDto } from '../dto';
@@ -22,7 +22,10 @@ import { AuthService } from '../services';
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly usersService: UsersService,
+  ) {}
 
   @UseGuards(AuthGuard('local'))
   @Post('login')
@@ -35,7 +38,7 @@ export class AuthController {
 
   @Post('register')
   async register(@Body() createUser: CreateUserDto): Promise<UserDto> {
-    const user = await this.authService.register(createUser);
+    const user = await this.usersService.create(createUser);
 
     return user;
   }

@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcryptjs';
 import { plainToClass } from 'class-transformer';
 
-import { UsersService, UserDto, CreateUserDto, User } from '~/users';
+import { UsersService, UserDto, User } from '~/users';
 
 import { LoginResponseDto } from '../dto';
 
@@ -29,23 +29,5 @@ export class AuthService {
     const token = await this.jwtService.signAsync({ sub: user.id });
 
     return plainToClass(LoginResponseDto, { token, user });
-  }
-
-  async register({
-    email,
-    firstname,
-    lastname,
-    password,
-    birthdate,
-  }: CreateUserDto): Promise<UserDto> {
-    const user = await this.usersService.create({
-      email,
-      firstname,
-      lastname,
-      password,
-      birthdate,
-    });
-
-    return user;
   }
 }
