@@ -6,7 +6,8 @@
   },
   "plugins": [
     "@typescript-eslint/eslint-plugin",
-    "prettier"
+    "prettier",
+    "import-helpers"
   ],
   "extends": [
     "plugin:@typescript-eslint/eslint-recommended",
@@ -23,6 +24,25 @@
     "prettier/prettier": "error",
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-types": "off",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "/^@nestjs/",
+          "module",
+          "/^~/",
+          [
+            "index"
+          ]
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ]
   }
 }

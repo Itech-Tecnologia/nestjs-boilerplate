@@ -1,0 +1,17 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "",
+  "password": "",
+  "database": "cotai",
+  "synchronize": false,
+  "dropSchema": false,
+  "logging": false,
+  "entities": ["./dist/**/entities/*.js"],
+  "migrations": ["./dist/database/migrations/*.js"],
+  "cli": {
+    "entitiesDir": "src",
+    "migrationsDir": "src/database/migrations"
+  }
+}
