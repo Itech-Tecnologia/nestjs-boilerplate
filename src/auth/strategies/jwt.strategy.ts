@@ -4,7 +4,7 @@ import { PassportStrategy } from '@nestjs/passport';
 
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
-import { UsersService, UserDto } from '../../users';
+import { UsersService, UserDto } from '~/users';
 
 interface TokenPayload {
   sub: string;

@@ -1,6 +1,6 @@
 import { Exclude, Expose, Type } from 'class-transformer';
 
-import { UserDto } from '../../users';
+import { UserDto } from '~/users';
 
 @Exclude()
 export class LoginResponseDto {

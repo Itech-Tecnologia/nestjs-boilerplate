@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer';
 import {
   IsString,
   IsNotEmpty,
@@ -6,6 +7,7 @@ import {
   ValidateIf,
 } from 'class-validator';
 
+@Expose()
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()

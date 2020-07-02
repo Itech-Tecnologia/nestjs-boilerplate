@@ -14,7 +14,8 @@ import { AuthGuard } from '@nestjs/passport';
 
 import { Request } from 'express';
 
-import { UserDto, CreateUserDto } from '../../users';
+import { UserDto, CreateUserDto } from '~/users';
+
 import { LoginResponseDto } from '../dto';
 import { AuthService } from '../services';
 
