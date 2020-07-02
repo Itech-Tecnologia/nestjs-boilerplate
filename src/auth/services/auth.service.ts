@@ -25,7 +25,7 @@ export class AuthService {
     return null;
   }
 
-  async login(user: User): Promise<LoginResponseDto> {
+  async getTokenByUser(user: User): Promise<LoginResponseDto> {
     const token = await this.jwtService.signAsync({ sub: user.id });
 
     return plainToClass(LoginResponseDto, { token, user });
