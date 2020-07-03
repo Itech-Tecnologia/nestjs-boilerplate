@@ -4,7 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
+
+import { Role } from '~/roles/entities';
 
 @Entity({ name: 'users' })
 export class User {
@@ -29,6 +33,14 @@ export class User {
 
   @Column({ type: 'date', nullable: true })
   birthdate: Date;
+
+  @ManyToMany(() => Role, role => role.users, { onUpdate: 'CASCADE' })
+  @JoinTable({
+    name: 'role_user',
+    joinColumn: { name: 'user_id' },
+    inverseJoinColumn: { name: 'role_id' },
+  })
+  roles: Role[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

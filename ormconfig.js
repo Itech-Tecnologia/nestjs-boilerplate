@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { resolve } = require('path');
+const { SnakeNamingStrategy } = require('typeorm-naming-strategies');
 
 const isTestMode = process.env.NODE_ENV === 'test';
 
@@ -23,6 +24,7 @@ module.exports = {
   synchronize: isTestMode,
   entities,
   migrations,
+  namingStrategy: new SnakeNamingStrategy(),
   cli: {
     entitiesDir: 'src',
     migrationsDir: 'src/database/migrations',

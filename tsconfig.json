@@ -11,7 +11,7 @@
     "allowJs": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true,
+    "incremental": false,
     "typeRoots": [
       "./node_modules/@types",
       "./src/@types"

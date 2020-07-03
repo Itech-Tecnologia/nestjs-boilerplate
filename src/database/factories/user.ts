@@ -1,8 +1,10 @@
 import { Factory } from 'fishery';
 
+import { RoleSlug } from '~/roles';
 import { User } from '~/users';
 
 import chance from './chance';
+import role from './role';
 
 export default Factory.define<User>(() => {
   const firstname = chance.first();
@@ -21,6 +23,7 @@ export default Factory.define<User>(() => {
       length: 8,
     }),
     birthdate: chance.birthday(),
+    roles: [role.build({ slug: RoleSlug.USER })],
     createdAt: new Date(),
     updatedAt: new Date(),
   };

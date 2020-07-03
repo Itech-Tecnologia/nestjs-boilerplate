@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthModule } from './auth';
 import { QueuesModule } from './queues';
+import { RolesModule } from './roles';
 import { SharedModule } from './shared';
 import { UsersModule } from './users';
 
@@ -14,6 +15,7 @@ import { UsersModule } from './users';
     UsersModule,
     AuthModule,
     QueuesModule,
+    RolesModule,
   ],
 })
 export class AppModule {}
