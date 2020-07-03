@@ -4,6 +4,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import factories from '~/database/factories';
+import { RolesService, RoleSlug } from '~/roles';
 import { User } from '~/users';
 
 import { UsersService } from './users.service';
@@ -15,18 +16,25 @@ describe('UsersService', () => {
     save: jest.fn(),
   });
 
+  const mockRolesService = {
+    getUserRole: jest.fn(),
+  };
+
   let usersService: UsersService;
+  let rolesService: RolesService;
   let usersRepository: Repository<User>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UsersService,
+        { provide: RolesService, useValue: mockRolesService },
         { provide: getRepositoryToken(User), useFactory: mockRepository },
       ],
     }).compile();
 
     usersService = module.get<UsersService>(UsersService);
+    rolesService = module.get<RolesService>(RolesService);
     usersRepository = module.get(getRepositoryToken(User));
   });
 
@@ -64,8 +72,12 @@ describe('UsersService', () => {
 
   it('should create a new user', async () => {
     const mockUser = factories.user.build();
+    const mockRole = factories.role.build({ slug: RoleSlug.USER });
 
     jest.spyOn(usersRepository, 'create').mockImplementation(() => mockUser);
+    jest
+      .spyOn(rolesService, 'getUserRole')
+      .mockImplementation(async () => mockRole);
     jest
       .spyOn(usersRepository, 'save')
       .mockImplementation(async () => mockUser);

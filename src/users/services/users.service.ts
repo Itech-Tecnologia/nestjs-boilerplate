@@ -4,6 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { plainToClass } from 'class-transformer';
 import { Repository } from 'typeorm';
 
+import { RolesService } from '~/roles';
+
 import { CreateUserDto, UserDto } from '../dtos';
 import { User } from '../entities';
 
@@ -11,6 +13,7 @@ import { User } from '../entities';
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly usersRepository: Repository<User>,
+    private readonly rolesService: RolesService,
   ) {}
 
   /**
@@ -66,6 +69,9 @@ export class UsersService {
       password,
       birthdate,
     });
+
+    const userRole = await this.rolesService.getUserRole();
+    user.roles = [userRole];
 
     await this.usersRepository.save(user);
 
