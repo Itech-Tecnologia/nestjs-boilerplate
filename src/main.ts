@@ -4,6 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { UI } from 'bull-board';
+import * as helmet from 'helmet';
 
 import { AppModule } from './app.module';
 
@@ -17,12 +18,10 @@ async function bootstrap() {
   });
   app.useGlobalPipes(validationPipe);
 
-  app.setGlobalPrefix('api/v1');
-
   app.enableCors();
+  app.use(helmet());
 
   const configService = app.get(ConfigService);
-  const port = configService.get('PORT');
 
   if (configService.get('NODE_ENV') === 'development') {
     app.use('/queue', UI);
@@ -37,6 +36,9 @@ async function bootstrap() {
     SwaggerModule.setup('api/swagger', app, document);
   }
 
+  app.setGlobalPrefix('api/v1');
+
+  const port = configService.get('PORT');
   await app.listen(port);
 }
 
