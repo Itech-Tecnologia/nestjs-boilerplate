@@ -9,7 +9,7 @@ export default Factory.define<Role>(() => ({
   slug: chance.pickone(Object.values(RoleSlug)),
   name: chance.first(),
   description: chance.sentence(),
-  users: [],
+  users: null,
   createdAt: new Date(),
   updatedAt: new Date(),
 }));

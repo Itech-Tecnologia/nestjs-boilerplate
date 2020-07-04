@@ -79,7 +79,6 @@ describe('RolesService', () => {
   it('should return true if the user has the role', async () => {
     const mockRole = factories.role.build({ slug: RoleSlug.ADMIN });
     const mockUser = factories.user.build();
-    mockUser.roles.pop();
 
     const createQueryBuilder: any = {
       leftJoin: jest.fn().mockReturnThis(),
@@ -103,7 +102,6 @@ describe('RolesService', () => {
   it("should return false if the user hasn't the role", async () => {
     const mockRole = factories.role.build({ slug: RoleSlug.USER });
     const mockUser = factories.user.build();
-    mockUser.roles.pop();
 
     const createQueryBuilder: any = {
       leftJoin: jest.fn().mockReturnThis(),
