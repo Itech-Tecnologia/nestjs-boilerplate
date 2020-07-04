@@ -5,9 +5,9 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import * as request from 'supertest';
 import { Repository } from 'typeorm';
 
-import { AuthService } from '~/auth/services';
+import { AuthService } from '~/auth/services/auth.service';
 import factories from '~/database/factories';
-import { User } from '~/users';
+import { User } from '~/users/entities/user.entity';
 
 import { AppModule } from './../src/app.module';
 import { DatabaseUtil } from './utils';

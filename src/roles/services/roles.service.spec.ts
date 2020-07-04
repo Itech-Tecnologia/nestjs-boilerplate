@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 
 import factories from '~/database/factories';
 
-import { RoleSlug, Role } from '../entities';
+import { RoleSlug, Role } from '../entities/role.entity';
 import { RolesService } from './roles.service';
 
 describe('RolesService', () => {

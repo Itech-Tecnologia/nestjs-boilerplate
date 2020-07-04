@@ -5,7 +5,7 @@ import { hash } from 'bcryptjs';
 import { sign, verify } from 'jsonwebtoken';
 
 import factories from '~/database/factories';
-import { UsersService } from '~/users';
+import { UsersService } from '~/users/services/users.service';
 
 import { AuthService } from './auth.service';
 

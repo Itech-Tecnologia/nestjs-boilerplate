@@ -4,8 +4,9 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import factories from '~/database/factories';
-import { RolesService, RoleSlug } from '~/roles';
-import { User } from '~/users';
+import { RoleSlug } from '~/roles/entities/role.entity';
+import { RolesService } from '~/roles/services/roles.service';
+import { User } from '~/users/entities/user.entity';
 
 import { UsersService } from './users.service';
 
