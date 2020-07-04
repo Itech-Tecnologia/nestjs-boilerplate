@@ -1,7 +1,7 @@
 import { Factory } from 'fishery';
 
-import { RoleSlug } from '~/roles';
-import { User } from '~/users';
+import { RoleSlug } from '~/roles/entities/role.entity';
+import { User } from '~/users/entities/user.entity';
 
 import chance from './chance';
 import role from './role';

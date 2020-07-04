@@ -1,6 +1,6 @@
 import { Factory } from 'fishery';
 
-import { Role, RoleSlug } from '~/roles';
+import { Role, RoleSlug } from '~/roles/entities/role.entity';
 
 import chance from './chance';
 

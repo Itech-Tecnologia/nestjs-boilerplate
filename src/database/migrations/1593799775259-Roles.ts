@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-import { Role, RoleSlug } from '~/roles/entities';
+import { Role, RoleSlug } from '~/roles/entities/role.entity';
 
 export class Roles1593799775259 implements MigrationInterface {
   name = 'Roles1593799775259';

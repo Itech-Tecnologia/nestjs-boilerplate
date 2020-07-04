@@ -7,7 +7,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { resolve } from 'path';
 
-import { StorageProvider } from './providers';
+import { StorageProvider } from './providers/storage.provider';
 
 @Global()
 @Module({

@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
 
-import { User } from '~/users';
+import { User } from '~/users/entities/user.entity';
 
-import { Role, RoleSlug } from '../entities';
+import { Role, RoleSlug } from '../entities/role.entity';
 
 @Injectable()
 export class RolesService {
@@ -41,5 +41,23 @@ export class RolesService {
     const roles = await this.getRolesFromUser(user);
 
     return roles.map(role => role.slug).includes(slug);
+  }
+
+  public async userHasAnyRole(user: User, slugs: RoleSlug[]): Promise<boolean> {
+    const roles = await this.getRolesFromUser(user);
+
+    let roleMatched = false;
+
+    for (const role of roles) {
+      for (const slug of slugs) {
+        if (role.slug === slug) {
+          roleMatched = true;
+
+          break;
+        }
+      }
+    }
+
+    return roleMatched;
   }
 }

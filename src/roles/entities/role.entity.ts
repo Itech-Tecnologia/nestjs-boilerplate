@@ -7,7 +7,7 @@ import {
   ManyToMany,
 } from 'typeorm';
 
-import { User } from '~/users/entities';
+import { User } from '~/users/entities/user.entity';
 
 export enum RoleSlug {
   ADMIN = 'admin',

@@ -8,7 +8,7 @@ import {
   JoinTable,
 } from 'typeorm';
 
-import { Role } from '~/roles/entities';
+import { Role } from '~/roles/entities/role.entity';
 
 @Entity({ name: 'users' })
 export class User {

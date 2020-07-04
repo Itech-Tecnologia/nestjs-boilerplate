@@ -4,10 +4,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { plainToClass } from 'class-transformer';
 import { Repository } from 'typeorm';
 
-import { RolesService } from '~/roles';
+import { RolesService } from '~/roles/services/roles.service';
 
-import { CreateUserDto, UserDto } from '../dtos';
-import { User } from '../entities';
+import { CreateUserDto } from '../dtos/create-user.dto';
+import { UserDto } from '../dtos/user.dto';
+import { User } from '../entities/user.entity';
 
 @Injectable()
 export class UsersService {

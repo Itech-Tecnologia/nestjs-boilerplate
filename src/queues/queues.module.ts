@@ -5,7 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Queue } from 'bull';
 import { setQueues } from 'bull-board';
 
-import { SendMailConsumer } from './consumers';
+import { SendMailConsumer } from './consumers/send-mail.consumer';
 import { QueuesList } from './queues-list';
 
 @Module({

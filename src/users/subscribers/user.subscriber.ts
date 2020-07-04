@@ -13,9 +13,9 @@ import {
   UpdateEvent,
 } from 'typeorm';
 
-import { QueuesList } from '~/queues';
+import { QueuesList } from '~/queues/queues-list';
 
-import { User } from '../entities';
+import { User } from '../entities/user.entity';
 
 @Injectable()
 export class UserSubscriber implements EntitySubscriberInterface<User> {

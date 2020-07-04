@@ -4,9 +4,11 @@ import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcryptjs';
 import { plainToClass } from 'class-transformer';
 
-import { UsersService, UserDto, User } from '~/users';
+import { UserDto } from '~/users/dtos/user.dto';
+import { User } from '~/users/entities/user.entity';
+import { UsersService } from '~/users/services/users.service';
 
-import { LoginResponseDto } from '../dto';
+import { LoginResponseDto } from '../dto/login-response.dto';
 
 @Injectable()
 export class AuthService {

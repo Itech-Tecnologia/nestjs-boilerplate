@@ -22,11 +22,15 @@ import {
 
 import { plainToClass } from 'class-transformer';
 
-import { UserDto, CreateUserDto, User, UsersService } from '~/users';
+import { CreateUserDto } from '~/users/dtos/create-user.dto';
+import { UserDto } from '~/users/dtos/user.dto';
+import { User } from '~/users/entities/user.entity';
+import { UsersService } from '~/users/services/users.service';
 
-import { User as CurrentUser } from '../decorators';
-import { LoginResponseDto, LoginRequestDto } from '../dto';
-import { AuthService } from '../services';
+import { User as CurrentUser } from '../decorators/user.decorator';
+import { LoginRequestDto } from '../dto/login-request.dto';
+import { LoginResponseDto } from '../dto/login-response.dto';
+import { AuthService } from '../services/auth.service';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @ApiTags('auth')
