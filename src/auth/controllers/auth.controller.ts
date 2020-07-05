@@ -32,9 +32,9 @@ import { LoginRequestDto } from '../dto/login-request.dto';
 import { LoginResponseDto } from '../dto/login-response.dto';
 import { AuthService } from '../services/auth.service';
 
-@UseInterceptors(ClassSerializerInterceptor)
 @ApiTags('auth')
 @Controller('auth')
+@UseInterceptors(ClassSerializerInterceptor)
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
@@ -66,7 +66,7 @@ export class AuthController {
   @ApiOkResponse({ description: 'Successful Response', type: UserDto })
   @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard())
   @Get('me')
   async me(@CurrentUser() user: User): Promise<UserDto> {
     return plainToClass(UserDto, user);
