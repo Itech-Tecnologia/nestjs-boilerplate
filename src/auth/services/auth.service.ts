@@ -4,7 +4,6 @@ import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcryptjs';
 import { plainToClass } from 'class-transformer';
 
-import { UserDto } from '~/users/dtos/user.dto';
 import { User } from '~/users/entities/user.entity';
 import { UsersService } from '~/users/services/users.service';
 
@@ -17,14 +16,14 @@ export class AuthService {
     private readonly usersService: UsersService,
   ) {}
 
-  async validateUser(email: string, password: string): Promise<UserDto | null> {
+  async validateUser(email: string, password: string): Promise<User | null> {
     const user = await this.usersService.findByEmailWithPassword(email);
 
     if (!user) return null;
 
     const passwordMatched = await compare(password, user.password);
 
-    if (passwordMatched) return plainToClass(UserDto, user);
+    if (passwordMatched) return user;
 
     return null;
   }

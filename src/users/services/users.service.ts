@@ -24,9 +24,23 @@ export class UsersService {
    * @returns {UserDto|undefined} userDto or undefined
    */
   public async findById(id: string): Promise<UserDto | undefined> {
+    const user = await this.usersRepository.findOneOrFail(id);
+
+    return plainToClass(UserDto, user);
+  }
+
+  /**
+   * This method returns the user with encrypted password.
+   * Use only to validate authetication.
+   *
+   * @author Harlan Cleiton
+   * @param id
+   * @returns {User|undefined} user or undefined
+   */
+  public async findByIdWithPassword(id: string): Promise<User | undefined> {
     const user = await this.usersRepository.findOne(id);
 
-    return user ? plainToClass(UserDto, user) : undefined;
+    return user;
   }
 
   /**
