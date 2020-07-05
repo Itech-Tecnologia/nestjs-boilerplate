@@ -58,6 +58,19 @@ describe('UsersService', () => {
     expect(user.password).toBeUndefined();
   });
 
+  it('should be return a user with password by id', async () => {
+    const mockUser = factories.user.build();
+
+    jest
+      .spyOn(usersRepository, 'findOne')
+      .mockImplementation(async () => mockUser);
+
+    const user = await usersService.findByIdWithPassword(mockUser.id);
+
+    expect(user).toEqual(mockUser);
+    expect(user.password).toBeDefined();
+  });
+
   it('should be return a user with password by email', async () => {
     const mockUser = factories.user.build();
 

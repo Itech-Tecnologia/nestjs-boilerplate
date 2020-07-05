@@ -24,7 +24,7 @@ export class UsersService {
    * @returns {UserDto|undefined} userDto or undefined
    */
   public async findById(id: string): Promise<UserDto | undefined> {
-    const user = await this.usersRepository.findOneOrFail(id);
+    const user = await this.usersRepository.findOne(id);
 
     return plainToClass(UserDto, user);
   }
