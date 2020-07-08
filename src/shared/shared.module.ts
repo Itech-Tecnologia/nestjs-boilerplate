@@ -3,9 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MulterModule, MulterModuleOptions } from '@nestjs/platform-express';
 
 import * as Joi from '@hapi/joi';
-import { MailerModule } from '@nestjs-modules/mailer';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { resolve } from 'path';
 
 import { StorageProvider } from './providers/storage.provider';
 
@@ -37,6 +34,7 @@ import { StorageProvider } from './providers/storage.provider';
         SMTP_USER: Joi.string().required(),
         SMTP_PASSWORD: Joi.string().required(),
 
+        REDIS_HOST: Joi.string().default('localhost'),
         REDIS_PASSWORD: Joi.string(),
         REDIS_DB: Joi.number().default(0),
         QUEUES_PREFIX: Joi.string().default('nestjs'),
@@ -69,39 +67,6 @@ import { StorageProvider } from './providers/storage.provider';
       },
     }),
 
-    MailerModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        transport: {
-          host: configService.get('SMTP_HOST'),
-          port: configService.get('SMTP_PORT'),
-          auth: {
-            user: configService.get('SMTP_USER'),
-            pass: configService.get('SMTP_PASSWORD'),
-          },
-        },
-        defaults: {
-          from: '"NestJS Team" <example@nest.com>',
-        },
-        template: {
-          dir: resolve(process.env.PWD, 'templates', 'emails'),
-          adapter: new HandlebarsAdapter(),
-          options: {
-            strict: true,
-          },
-        },
-        options: {
-          partials: {
-            dir: resolve(process.env.PWD, 'templates', 'emails', 'partials'),
-            options: {
-              strict: true,
-            },
-          },
-        },
-      }),
-    }),
-
     MulterModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService, StorageProvider],
@@ -114,9 +79,7 @@ import { StorageProvider } from './providers/storage.provider';
 
         const storage = s3Storage || localStorage;
 
-        const limitFileSize = Number(
-          configService.get('MULTER_LIMIT_SILE_SIZE='),
-        );
+        const limitFileSize = configService.get('MULTER_LIMIT_SILE_SIZE=');
 
         return {
           storage,
