@@ -48,7 +48,7 @@
     "bull": "^3.15.0",
     "bull-board": "^0.9.0",
     "chance": "^1.1.6",
-    "class-transformer": "^0.2.3",
+    "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "fishery": "^1.0.0",
     "handlebars": "^4.7.6",
